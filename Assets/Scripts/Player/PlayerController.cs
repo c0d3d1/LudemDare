@@ -12,15 +12,16 @@ public class PlayerController : MonoBehaviour
 
     public float runSpeed = 20.0f;
 
+    private Animator anim;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        
 
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -28,6 +29,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (horizontal > 0.25 || vertical > 0.25 || horizontal < -0.25 || vertical < -0.25)
+        {
+            anim.SetBool("Walking", true);
+        }
+        else if(horizontal < 0.25 && vertical < 0.25 && horizontal > -0.25 && vertical > -0.25)
+        {
+            anim.SetBool("Walking", false);
+        }
         if (horizontal != 0 && vertical != 0) // Check for diagonal movement
         {
             horizontal *= moveLimiter;
