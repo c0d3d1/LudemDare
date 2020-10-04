@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DitzeGames.Effects;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Sword : MonoBehaviour
     private LookAtMouse lam;
     private Vector3 tempLocation;
     private bool canSwing = true;
+    private bool haveCollided = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class Sword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             if (canSwing)
             {
@@ -86,5 +88,25 @@ public class Sword : MonoBehaviour
         transform.position = transform.parent.position;
         canSwing = true;
         transform.eulerAngles = new Vector3(0, 0, 0);
+        haveCollided = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy") && !haveCollided)
+        {
+            //damage
+            if (col.GetComponent<ArcherEnemy>() ?? null)
+            {
+                col.GetComponent<ArcherEnemy>().takeDamage(1);
+                haveCollided = true;
+            }
+            else if (col.GetComponent<FollowEnemy>() ?? null)
+            {
+                col.GetComponent<FollowEnemy>().takeDamage(1);
+                haveCollided = true;
+            }
+            CameraShake.ShakeOnce(0.15f, 2f);
+        }
     }
 }

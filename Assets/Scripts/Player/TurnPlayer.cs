@@ -13,11 +13,10 @@ public class TurnPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float angle = 0;
 
-        var dir = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        //transform.position = 
-        //find direction from mouse to player then move sword to that of sword + direction
+        Vector3 relative = transform.InverseTransformPoint(GameObject.FindGameObjectWithTag("Player").transform.position);
+        angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
+        transform.Rotate(0, 0, -angle + 45);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6086178014383911909}
   - component: {fileID: 6086178014383911908}
   - component: {fileID: 6086178014383911905}
+  - component: {fileID: 469587695884804082}
   - component: {fileID: 6086178014383911911}
   - component: {fileID: 6086178014383911904}
   m_Layer: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -3605174944130423874, guid: 0e9496bb327661e4089af6b951263ae9,
+  m_Sprite: {fileID: 2302325839914606419, guid: 0e9496bb327661e4089af6b951263ae9,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,6 +121,47 @@ MonoBehaviour:
   speed: 5
   stoppingDistance: 1
   attackingTime: 0
+  health: 5
+--- !u!114 &469587695884804082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086178014383911931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198ea66259fca0c43bca2ba692e30232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: {x: 1, y: 1, z: 0}
+  Duration: 1
+  Speed: 10
+  Curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DeltaMovement: 1
 --- !u!61 &6086178014383911911
 BoxCollider2D:
   m_ObjectHideFlags: 0

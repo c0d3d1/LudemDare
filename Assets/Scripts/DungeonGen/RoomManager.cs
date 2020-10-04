@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> Enemies = new List<GameObject>();
+    public List<GameObject> Enemies = new List<GameObject>();
 
     public GameObject[] Doors;
 
     public bool isPlayerhere = false;
 
+
+    private void Start()
+    {
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            Enemies.Add(transform.GetChild(0).GetChild(i).gameObject);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -32,10 +40,6 @@ public class RoomManager : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy") && !Enemies.Contains(col.gameObject))
-        {
-            Enemies.Add(col.gameObject);
-        }
         if (col.CompareTag("Player"))
         {
             isPlayerhere = true;

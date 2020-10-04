@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DitzeGames.Effects;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,11 @@ public class Arrow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         target = new Vector2(player.position.x, player.position.y);
+        float angle = 0;
+
+        Vector3 relative = transform.InverseTransformPoint(GameObject.FindGameObjectWithTag("Player").transform.position);
+        angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
+        transform.Rotate(0, 0, -angle + 45);
     }
 
     void Update()
@@ -34,8 +40,10 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !destroying)
         {
+            CameraShake.ShakeOnce(0.2f, 2.5f);
+            GameObject.Find("Health").GetComponent<Health>().takeDamage();
             Destroy(gameObject);
             // damage player
         }
